@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>UDC-GarageK9</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      font-size: 21px;
+      background-color: #f1f1f1;
+      display:inline-block; margin-right:50px;
+      height: 30%;
+      
+    }
+       /* my Signout button */
+    
+    
+       button {
+      background-color: #df2525;;
+      color: white;
+      padding: 14px 20px;
+      margin: 3px 20;
+      border: none;
+      cursor: pointer;
+      width: 7%;
+      opacity: 0.9;
+      float: right;
+    }
+   
+
+    button:hover {
+      opacity:1;
+    }
+   
+    
+    
+    /* Set black background color, white text and some padding */
+    footer {
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #993333;
+  padding: 5px;
+  color: white;
+  text-align: center;
+
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+        
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+</head>
+<body>
+  <script src='fireBase.js'></script>
+  <script src='homepage.js'></script>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <div class="site-logo">
+    <img src="udclogo.png" alt="logo">
+  </div>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+                <li><a href="#"><li><a href="adminlogin.html"target="_blank" id="onlink">Admin Login</a></li>
+
+               
+      </ul>
+    <ul class="button">
+  <button onclick="homePage.logOut()" >SignOut</button>
+<nav>
+   <ul>
+
+   </ul>
+   </nav>
+   </div>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
+      <div class="boxed">
+        <p><a href="purchase.html"target="_blank">Purchase Parking Pass</a></p>
+        <p><a href="report.html"target="_blank">Report Incident</a></p>
+  
+      </div>
+      
+      <p><a href="contact.html"target="_blank">Contact Us</a></p>
+
+      </div>
+
+     
+
+   
+    <div class="col-sm-8 text-left"> 
+      <h1 style="background-color: #e24646;">Welcome to myUDC Garage Self-Service Portal...</h1>
+      <hr>
+    
+<bold><h3>Through this portal students and school officials can perform the following tasks:</bold></h3>
+<br>
+      <ul>
+        <li style="color:rgb(46, 40, 40);font-size:20px">Students have the ability to report any witnessed garage related incidents anonymously.</li>
+        <br>
+        <li style="color:rgb(46, 40, 40);font-size:20px">Students have the ability to purchase Parking Passes from the comofort of their mobile devices.</li>
+        <br>
+        <li style="color:rgb(46, 40, 40);font-size:20px">School officials have the ability to look up vehicles using their license plate numbers, and contact their owners immediately during case of emergencies.</li>
+      </ul>  
+      
+
+</div>
+
+<footer class="container-fluid text-center">
+  <ul style="list-style: none;">
+  <h4><strong><lil>University of the District of Columbia</li></strong>
+                    </h4>
+                    <li>4200 Connecticut AVE NW, Washington,DC 20008</li>
+
+                        (202) 282-0120
+                          <div class="footerLinks">
+                        <a href="https://udc.edu/"target="_blank">www.udc.edu</a>
+</ul>
+
+</footer>
+
+</body>
+</html>

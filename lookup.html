@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Look Up Vehicle</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+<head><title>Read, Write, Update, Delete  Records </title></head>
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+
+    /* Full-width input fields */
+    input[type=text], input[type=text] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus, input[type=text]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+    
+     button {
+      background-color: #25df63;;
+      color: white;
+      padding: 14px 20px;
+      margin: 3px 20;
+      border: none;
+      cursor: pointer;
+      width: 11%;
+      opacity: 0.9;
+      float: middle;
+    }
+   
+
+    button:hover {
+      opacity:1;
+    }
+
+
+
+    /* Add padding to container elements */
+    .container {
+      padding: 16px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+      .paynowbutton, .billmebutton {
+        width: 100%;
+      }
+    }
+  </style>
+
+<body>
+
+<h2>You may look up a vehicle by typing the vehicle's license plate in the "License Plate" field below and Click on "SEARCH VEHICLE" </h2>
+<br>
+Make  <input id="makebox" type="text"></input>     <br><br>
+Model  <input id="modelbox" type="text"></input>     <br><br>
+Color  <input id="colorbox" type="text"></input>     <br><br>
+License Plate  <input id="platebox" type="text"></input>     <br><br>
+State  <input id="statebox" type="text"></input>     <br><br>
+
+<h2>Student contact information: </h2>
+Name    <input id="namebox" type="text"></input>    <br><br>
+Phone <input id="phonebox" type="text"></input>     <br><br>
+UDC Email <input id="emailbox" type="text"></input>  <br><br>
+<br>
+<br>
+
+
+<button id ="search">SEARCH VEHICLE</button>
+
+
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+<script src='fireBase.js'></script>
+
+
+
+
+<script id="MainScript">
+
+
+var nameV, phoneV, emailV, makeV, modelV, colorV, plateV, stateV;
+
+function retrieveUserInput () {
+    nameV = document.getElementById('namebox').value;
+    phoneV = document.getElementById('phonebox').value;
+    emailV = document.getElementById('emailbox').value;
+    makeV = document.getElementById('makebox').value;
+    modelV = document.getElementById('modelbox').value;
+    colorV = document.getElementById('colorbox').value;
+    plateV = document.getElementById('platebox').value;
+    stateV = document.getElementById('statebox').value;
+}
+
+
+
+document.getElementById('search').onclick = function () {
+    retrieveUserInput();
+    let record ={} ;
+    let records;
+    firebase.database().ref('studentRecord').on('value',function(snapshot){
+        records = snapshot.val();
+        for(var key in records) {
+            if (records[key].Plate == plateV) {
+                record = records[key];
+                break;
+            }
+        }
+        document.getElementById('namebox').value = record.NameOfStudent;
+        document.getElementById('phonebox').value = record.Phone;
+        document.getElementById('emailbox').value = record.Email;
+        document.getElementById('makebox').value = record.Make;
+        document.getElementById('modelbox').value = record.Model;
+        document.getElementById('colorbox').value = record.Color;
+        document.getElementById('platebox').value = record.Plate;
+        document.getElementById('statebox').value = record.State;
+    });
+}
+
+     
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Student Records</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+
+
+<head><title>Read, Write, Update, Delete  Records </title></head>
+
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+
+    /* Full-width input fields */
+    input[type=text], input[type=text] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus, input[type=text]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+    
+     button {
+      background-color: #25df63;;
+      color: white;
+      padding: 14px 20px;
+      margin: 3px 20;
+      border: none;
+      cursor: pointer;
+      width: 10%;
+      opacity: 0.9;
+      float: middle;
+    }
+   
+
+    button:hover {
+      opacity:1;
+    }
+
+
+
+    /* Add padding to container elements */
+    .container {
+      padding: 16px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+      .paynowbutton, .billmebutton {
+        width: 100%;
+      }
+    }
+  </style>
+<body>
+    
+<h3>Admins may look up a student's record by typing their N Number in the  "ID Number" field below and Click on "SEARCH"</h3>
+<br>   
+<h2>Student information: </h2>
+Name    <input id="namebox" type="text"></input>    <br><br>
+ID Number <input id="idbox" type="text"></input>    <br><br>
+Phone <input id="phonebox" type="text"></input>     <br><br>
+UDC Email <input id="emailbox" type="text"></input>  <br><br>
+Grade <input id="gradebox" type="text"></input>     <br><br>
+Gender  <input id="genbox" type="text"></input>
+<br>
+<h2>Vehicle information: </h2>
+Make  <input id="makebox" type="text"></input>     <br><br>
+Model  <input id="modelbox" type="text"></input>     <br><br>
+Color  <input id="colorbox" type="text"></input>     <br><br>
+License Plate  <input id="platebox" type="text"></input>     <br><br>
+State  <input id="statebox" type="text"></input>     <br><br>
+
+<button id ="add">ADD</button>
+<button id ="search">SEARCH</button>
+<button id ="update">UPDATE</button>
+<button id ="delete">DELETE</button>
+
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+<script src='fireBase.js'></script>
+<script src='records.js'></script>
+
+
+
+
+<script id="MainScript">
+    
+
+
+// -----------------------------------Retrieve Data -------------------//
+
+var nameV, idV, phoneV, emailV, gradeV, genV, makeV, modelV, colorV, plateV, stateV;
+
+                function retrieveUserInput () {
+                    nameV = document.getElementById('namebox').value;
+                    idV = document.getElementById('idbox').value;
+                    phoneV = document.getElementById('phonebox').value;
+                    emailV = document.getElementById('emailbox').value;
+                    gradeV = document.getElementById('gradebox').value;
+                    genV = document.getElementById('genbox').value;
+                    makeV = document.getElementById('makebox').value;
+                    modelV = document.getElementById('modelbox').value;
+                    colorV = document.getElementById('colorbox').value;
+                    plateV = document.getElementById('platebox').value;
+                    stateV = document.getElementById('statebox').value;
+                }
+
+// --------------------------------Insert Record --------------//
+
+                document.getElementById('add').onclick = function () {
+                    retrieveUserInput();
+                firebase.database().ref('studentRecord/'+idV).set({
+                 NameOfStudent: nameV,
+                 IDNumber: idV,
+                 Phone: phoneV,
+                 Email: emailV,
+                 Grade: gradeV,
+                 Gender: genV,
+                 Make: makeV,
+                 Model: modelV,
+                 Color: colorV,
+                 Plate: plateV,
+                 State: stateV,  
+                },
+                 
+onSubmission);
+  }
+
+  function onSubmission(error){
+    if(error){
+      alert("record not submitted please retry.. :(");
+    }
+    else  alert ("You Have Succesfully added a Student Record!..");
+  }       
+
+
+//--------------------- Search Record ---------------------------//
+
+document.getElementById('search').onclick = function () {
+    retrieveUserInput();
+    firebase.database().ref('studentRecord/'+idV).on('value',function(snapshot){
+            document.getElementById('namebox').value = snapshot.val().NameOfStudent;
+            document.getElementById('gradebox').value = snapshot.val().Grade;
+            document.getElementById('genbox').value = snapshot.val().Gender;
+            document.getElementById('phonebox').value = snapshot.val().Phone;
+            document.getElementById('emailbox').value = snapshot.val().Email;
+            document.getElementById('makebox').value = snapshot.val().Make;
+            document.getElementById('modelbox').value = snapshot.val().Model;
+            document.getElementById('colorbox').value = snapshot.val().Color;
+            document.getElementById('platebox').value = snapshot.val().Plate;
+            document.getElementById('statebox').value = snapshot.val().State;
+            
+    });
+}
+
+
+
+// --------------------------------Update Record --------------//
+
+document.getElementById('update').onclick = function () {
+    retrieveUserInput();
+                firebase.database().ref('studentRecord/'+idV).update({
+                    // Only allow the below records to be updated
+                Make: makeV,
+                 Model: modelV,
+                 Color: colorV,
+                 Plate: plateV,
+                 State: stateV,
+                });
+}
+
+// --------------------------------Delete Record --------------//
+
+document.getElementById('delete').onclick = function () {
+    retrieveUserInput();
+                firebase.database().ref('studentRecord/'+idV).remove();{
+                
+                }
+}
+</script>
+
+
+</body>
+</html>

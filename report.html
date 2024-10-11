@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8" />
+<head>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,400,700'>
+<div class="container">
+
+
+      <title>Report Incident</title>
+
+        <div class="site-logo">
+      <img src="udclogo.png" alt="logo">
+
+      <br>
+      <br>
+      <br>
+
+      <a href="#"><li><a href="purchase.html" id="onlink">Purchase Parking Pass</a>
+  
+  
+        <li><a href="contact.html">Contact</a></li>
+      
+ 
+         <a href="#"><li><a href="index.html" id="onlink"> myUDC Login</a>
+   
+      <a href="#"><li><a href="homepage.html" id="onlink">Home</a>
+
+      <div class="row">
+
+        <div class="col-lg-8 col-lg-offset-2">
+          <center><h4>Submit the form below to report any garage related incidents anonymously.</h4></center>
+
+          <br>
+          
+          <form id="incidentReport" method="post" action="" role="form">
+  
+          <div class="report"></div>
+  
+          <div class="controls">
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="incident">Select incident date:</label>
+                <input type="date" id="date" name="date">
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+          </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="form_phone">Subject:</label>
+                <input id="subject" type="subject" name="subject" class="form-control" placeholder="subject">
+                <div class="help-block with-errors"></div>
+              </div>
+            </div>
+          </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label for="form_message">Message *</label>
+                  <textarea id="message" name="message" class="form-control" placeholder="Please write a brief description here*" rows="4" required data-error="Please,leave us a message."></textarea>
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            
+              <label for="incident">Attach pictures</label>
+  <input type="file" id="file" name="filename">
+  <br>
+              <div class="col-md-12">
+                <input type="submit" class="btn btn-success btn-send" value="Submit Incident">
+              </div>
+            </div>
+           
+          </div>
+  
+          </form>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js'></script>
+
+
+   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+
+<script src='fireBase.js'></script>
+<script src="report.js"></script>
+
+
+
+</div>
+</div>
+</div>
+</body>
+
+</html>

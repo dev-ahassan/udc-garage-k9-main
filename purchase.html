@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+
+   <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-analytics.js"></script>
+
+<script src='fireBase.js'></script>
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
+
+    /* Full-width input fields */
+    input[type=text], input[type=text] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: none;
+      background: #f1f1f1;
+    }
+
+    /* Add a background color when the inputs get focus */
+    input[type=text]:focus, input[type=text]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+
+    /* my Signout button */
+    
+    
+     button {
+      background-color: #df2525;;
+      color: white;
+      padding: 14px 20px;
+      margin: 3px 20;
+      border: none;
+      cursor: pointer;
+      width: 10%;
+      opacity: 0.9;
+      float: right;
+    }
+   
+
+    button:hover {
+      opacity:1;
+    }
+
+    /* Extra styles for the Pay Now button */
+    .paynowbutton {
+      padding: 14px 20px;
+      background-color: #003499;
+    }
+
+    /* Float cancel and signup buttons and add an equal width */
+    .paynowbutton, .billmebutton {
+      background-color: #003499;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+
+      float: left;
+      width: 20%;
+
+    }
+    .billmebutton {
+    background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+
+      float: right;
+      width: 20%;
+  }
+
+    /* Add padding to container elements */
+    .container {
+      padding: 16px;
+    }
+
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: #474e5d;
+      padding-top: 50px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* Style the horizontal ruler */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+    
+    /* The Close Button (x) */
+    .close {
+      position: absolute;
+      right: 35px;
+      top: 15px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #f1f1f1;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #f44336;
+      cursor: pointer;
+    }
+
+
+
+    /* Change styles for cancel button and signup button on extra small screens */
+    @media screen and (max-width: 300px) {
+      .paynowbutton, .billmebutton {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="site-logo">
+    <img src="udclogo.png" alt="logo">
+
+  <center> <h1> Parking Pass Purchase  Form</h1> 
+    <button onclick="purchase.logOut()" >SignOut</button>
+</center>
+  <hr>
+</div>
+
+<!-- <form action="paypal.html" >  -->
+
+
+<form id="purchaseForm">
+  <div class="purchase">
+  
+    <h2>Student information</h2>
+      <label><b>First name</b></label> 
+      <input type="text" id="fname" name="firstname" placeholder="First name" size="15" required /> 
+
+<label><b>Middle name</b></label> 
+<input type="text" id="mname" name="middlename" placeholder="Middle name" size="15" required /> 
+<label> <b>Last name</b></label>
+
+<input type="text" id="lname" name="lastname" placeholder="Last name" size="15"required />
+
+<label for="email"><b>Email</b></label>
+      <input type="text" id="email" placeholder="Enter your UDC Email" name="email" required>
+      
+<label> <b>ID Number</b></label>  
+<input type="text" id="IDNum" name="IDNumber" placeholder="ex: N00261" size="15"required /> 
+<div>
+
+<hr>
+  <p style="font-size:30px">Which semester are you looking to purchase the parking pass for ?</p>
+  <input type="checkbox" id="semester" name="Fall Semester" value="Fall Semester">
+  <label for="semester"> Fall ($75)</label><br>
+  <input type="checkbox" id="semester" name="Spring Semester" value="Spring Semester">
+  <label for="semester"> Spring ($75)</label><br>
+  <input type="checkbox" id="semester" name="School Year" value="School Year">
+  <label for="semester"> Academic Year ($150)</label>
+  
+  
+  <hr>
+  <hr>
+  
+  <p style="font-size:30px">Will you require an overnight parking pass ?</p>
+  <input type="checkbox" id="semester" name="overnight" value="YES">
+  <label for="overnight">Yes</label><br>
+  <input type="checkbox" id="overnight" name="overnight" value="NO">
+  <label for="semester">No</label><br>
+  
+  
+  <hr>
+  <div class="Vinfo"></div>
+  <h2>Vehicle information</h2>
+    <label for="make">Make</label>
+    <input type="text" id="make" name="make" placeholder="" size="2"required />
+    <br>
+      <label for="model">Model</label>
+      <input type="text" id="model" name="model" placeholder="" size="2"required />
+      <label for="year">Year</label>
+    <input type="text" id="year" name="make" placeholder="" size="2"required />
+     
+      <label for="color">Color</label>
+      <input type="text" id="color" name="color" placeholder="" size="2"required /> 
+  <br>
+    <label> License Plate Number</label>
+    <input type="text" id="plateNum" name="licenseplate" placeholder="" size="2"required />
+
+    
+    
+    <label>State</label>
+    <input type="text" id="state" name="licenseplate" placeholder="" size="2"required />   
+       
+    
+
+      <div class="submit">
+
+        <button class="paynowbutton" onclick="window.location.href='paypal.html'">Pay Now</button>
+        <button type="submit" class="billmebutton">Bill Me on Student Account</button>
+
+      </div>
+    </div>
+  </form>
+
+</div>
+
+
+
+
+  <script src="purchase.js"></script>
+  <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+  <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js'></script>
+
+</body>
+</html>
